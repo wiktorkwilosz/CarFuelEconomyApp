@@ -28,33 +28,20 @@ string distance = Console.ReadLine();
 
 
  Console.ReadLine();
-Console.WriteLine("Wprowadź ilość litrów zatankowanego paliwa");
+Console.WriteLine("Nacisnij Q żeby wyjść");
 string volume = Console.ReadLine();
-
-
-
-
 
 
 while (true)
 {
-    Console.WriteLine("Wprowadź ilość zatankowanego paliwa");
     var input = Console.ReadLine();
     if (input == "q" || input == "Q")
     {
         break;
     }
-    try
-    {
-        cartype.AddGrade(input);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Wystąpił błąd wyjątku: {ex.Message}");
-    }
+    
 
     var statistics = cartype.GetStatistics();
-
     {
 
 

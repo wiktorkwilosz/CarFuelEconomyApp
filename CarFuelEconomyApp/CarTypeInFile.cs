@@ -7,15 +7,15 @@ namespace CarFuelEconomyApp
     public class CarTypeInFile : CarTypeBase
     {
         public delegate void CarTypeAddedDelegate(object sender, EventArgs args);
-        public event CarTypeAddedDelegate CarTypeAdded;
+        public event CarTypeAddedDelegate AddedValue;
 
         public const string fileName = "CarTypeAppValues.txt";
 
-        public object AddedValue { get; private set; }
+        
 
        
 
-        public CarTypeInFile(string brand, string plate, float distance, double volume)
+        public CarTypeInFile(string brand,string plate, float distance, float volume)
             
         {
             Brand = brand;
@@ -25,25 +25,27 @@ namespace CarFuelEconomyApp
 
         }
 
-       
+        
+
         public override void AddGrade(float grade)
         {
             using (var writer = File.AppendText(fileName))
             {
 
                 writer.WriteLine(grade);
-            }
-                    //        if (AddedValue != null)
-                    //        {
-                    //            AddedValue(this, new EventArgs());
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        throw new Exception("Błędna wartość, wartość musi być wieksza od zera");
-                    //    }
-                    //}
+                if (AddedValue != null)
+                {
+                    AddedValue(this, new EventArgs());
                 }
+                else
+                {
+                    throw new Exception("Błędna wartość. Wartość musi być większa od zera");
+                }
+
+
+            }
+        }
+
         public virtual void AddGrade(string grade)
         {
             {
@@ -53,7 +55,7 @@ namespace CarFuelEconomyApp
                 }
                 else
                 {
-                    throw new Exception("Invalid number");
+                    throw new Exception("Niepoprawna wartość");
                 }
             }
         }
@@ -98,12 +100,14 @@ namespace CarFuelEconomyApp
             return statistics;
         }
 
-        public override void AddGrade(double grade)
+       
+
+        public override void AddGrade(decimal grade)
         {
             throw new NotImplementedException();
         }
 
-        public override void AddGrade(decimal grade)
+        public override Statistics RememberTheCollectedPoints()
         {
             throw new NotImplementedException();
         }

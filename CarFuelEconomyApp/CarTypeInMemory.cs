@@ -8,14 +8,18 @@ namespace CarFuelEconomyApp
     internal class CarTypeinMemory : CarTypeBase
     {
         public delegate void CarTypeAddedDelegate(object sender, EventArgs args);
-        
+
+        private IEnumerable<object> grades;
+        private byte grade;
+
+
         public string Brand;
         private string Plate;
         private float Distance;
-        private double Volume;
+        private float Volume;
 
         public event CarTypeAddedDelegate AddedValue;
-        public CarTypeinMemory(string brand, string plate, float distance, double volume)
+        public CarTypeinMemory(string brand, string plate, float distance, float volume)
             : base(brand, plate, distance, volume)
         {
 
@@ -23,7 +27,7 @@ namespace CarFuelEconomyApp
 
         public override void AddGrade(float grade)
         {
-            if (grade >= 0 && grade <= 100)
+            if (grade >= 0 )
             {
                 this.AddGrade(grade);
                 if (AddedValue != null)
@@ -42,15 +46,12 @@ namespace CarFuelEconomyApp
                 }
                 else
                 {
-                    throw new Exception("Invalid number");
+                    throw new Exception("Niepoprawna wartość");
                 }
 
             }
         }
-        public override void AddGrade(double grade)
-        {
-            
-        }
+       
 
         public override void AddGrade(decimal grade)
         {
@@ -60,6 +61,17 @@ namespace CarFuelEconomyApp
         public override Statistics GetStatistics()
         {
             throw new NotImplementedException();
+        }
+
+        public override Statistics RememberTheCollectedPoints()
+        {
+            var statistics = new Statistics();
+
+            foreach (var grade in this.grades)
+            {
+                statistics.PointsCollected += grade + ",";
+            }
+            return statistics;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace CarFuelEconomyApp
     public  class CarType : CarTypeBase
     {
         private List<float> values = new List<float>();
-        public CarType(string brand, string plate, float distance, double volume)
+        public CarType(string brand, string plate, float distance, float volume)
             :base(brand, plate, distance, volume)
         {
             this.Brand = brand;
@@ -27,12 +27,9 @@ namespace CarFuelEconomyApp
         public float Distance { get; private set; } 
         public double Volume { get; private set; }  
 
-        public override void AddGrade(float grade)
-        {
-           
-        }
+       
 
-        public override void AddGrade(double grade)
+        public override void AddGrade(float grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
@@ -62,5 +59,9 @@ namespace CarFuelEconomyApp
             return statistics;
         }
 
+        public override Statistics RememberTheCollectedPoints()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

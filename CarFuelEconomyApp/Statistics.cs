@@ -4,17 +4,17 @@ namespace CarFuelEconomyApp
 {
     public class Statistics
     {
-        public double Volume { get;  set; }
+        public float Volume { get; private set; }
 
-        public float Distance { get;  set; }
-        public int Count { get;  set; }
+        public float Distance { get;  private set; }
+        
 
 
 
         public Statistics()
         {
             this.Distance = 0;
-            this.Volume = 0.0;
+            this.Volume = 0;
 
         }
         public double Average
@@ -26,11 +26,15 @@ namespace CarFuelEconomyApp
             }
         }
 
-        internal void AddGrade(float grade)
+        public void AddGrade(float grade)
         {
-            throw new NotImplementedException();
+            this.Distance += grade;
+            this.Volume += grade;
         }
+
+        public string PointsCollected { get; internal set; }
     }
+
 }
     
     
