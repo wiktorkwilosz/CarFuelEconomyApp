@@ -13,21 +13,18 @@ namespace CarFuelEconomyApp
         private byte grade;
 
 
-        public string Brand;
-        private string Plate;
-        private float Distance;
-        private float Volume;
+   
 
         public event CarTypeAddedDelegate AddedValue;
-        public CarTypeinMemory(string brand, string plate, float distance, float volume)
-            : base(brand, plate, distance, volume)
+        public CarTypeinMemory(string brand, string plate)
+            : base(brand, plate)
         {
 
         }
 
         public override void AddGrade(float grade)
         {
-            if (grade >= 0 )
+            if (grade > 0 )
             {
                 this.AddGrade(grade);
                 if (AddedValue != null)
@@ -35,9 +32,13 @@ namespace CarFuelEconomyApp
                     AddedValue(this, new EventArgs());
                 }
             }
+            else
+            {
+                throw new Exception("Błędna wartość. Wartość musi być większa od zera");
+            }
         }
 
-        public virtual void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             {
                 if (float.TryParse(grade, out float result))
@@ -51,16 +52,31 @@ namespace CarFuelEconomyApp
 
             }
         }
-       
 
-        public override void AddGrade(decimal grade)
+
+        public override void AddGrade(int grade)
         {
-            throw new NotImplementedException();
+            float gradeAsFloat = (int)grade;
+            this.AddGrade(gradeAsFloat);
         }
 
         public override Statistics GetStatistics()
         {
-            throw new NotImplementedException();
+            var statistics = new Statistics();
+
+            {
+
+                {
+                    foreach (var grade in this.grades) ;
+
+                    statistics.AddGrade(grade);
+
+                }
+
+
+
+            }
+            return statistics;
         }
 
         public override Statistics RememberTheCollectedPoints()

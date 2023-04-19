@@ -15,13 +15,13 @@ namespace CarFuelEconomyApp
 
        
 
-        public CarTypeInFile(string brand,string plate, float distance, float volume)
+        public CarTypeInFile(string brand,string plate)
+            :base(brand, plate) 
             
         {
             Brand = brand;
             Plate = plate;
-            Distance = distance;
-            Volume = volume;
+            
 
         }
 
@@ -31,22 +31,32 @@ namespace CarFuelEconomyApp
         {
             using (var writer = File.AppendText(fileName))
             {
+                if (grade > 0)
 
-                writer.WriteLine(grade);
-                if (AddedValue != null)
                 {
-                    AddedValue(this, new EventArgs());
-                }
-                else
-                {
-                    throw new Exception("Błędna wartość. Wartość musi być większa od zera");
-                }
 
+                    writer.WriteLine(grade);
+                    if (AddedValue != null)
+                    {
+                        AddedValue(this, new EventArgs());
+                    }
+                    //else
+                    //{
+                    //    throw new Exception("Błędna wartość. Wartość musi być większa od zera");
+                    //}
+
+
+                }
 
             }
         }
+        public override void AddGrade(int grade)
+        {
+            float gradeAsFloat = (int)grade;
+            this.AddGrade(gradeAsFloat);
+        }
 
-        public virtual void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             {
                 if (float.TryParse(grade, out float result))
@@ -76,8 +86,8 @@ namespace CarFuelEconomyApp
                     var line = reader.ReadLine();
                     while (line != null)
                     {
-                        var namber = float.Parse(line);
-                        grades.Add(namber);
+                        var number = float.Parse(line);
+                        grades.Add(number);
                         line = reader.ReadLine();
 
                     }
@@ -94,6 +104,7 @@ namespace CarFuelEconomyApp
                 {
 
                     statistics.AddGrade(grade);
+                    statistics.PointsCollected += grade;
                 }
 
             }
@@ -102,14 +113,13 @@ namespace CarFuelEconomyApp
 
        
 
-        public override void AddGrade(decimal grade)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public override Statistics RememberTheCollectedPoints()
         {
-            throw new NotImplementedException();
+            var gradesFromFile = this.ReadGradesFromFile();
+            var result = this.CountStatistics(gradesFromFile);
+            return result;
         }
     }
 }
