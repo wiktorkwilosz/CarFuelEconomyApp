@@ -37,7 +37,7 @@ namespace CarFuelEconomyApp
 
         public override void AddGrade(int grade)
         {
-            throw new NotImplementedException();
+            
         }
         public override void AddGrade(string grade)
         {
