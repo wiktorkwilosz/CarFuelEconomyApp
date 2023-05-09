@@ -4,34 +4,54 @@ namespace CarFuelEconomyApp.Tests
     {
 
         [Test]
-        public void CheckCarTypeStatisticsCount()
+        public void CheckCarTypeStatisticsMax()
         {
             //arrange
-            
-            var cartype = new CarType("Merc","CLK");
-            cartype.AddGrade(600);
+
+            var cartype = new CarTypeInMemory("Mercedes", "Clk");
+            cartype.AddGrade(655f);
             cartype.AddGrade(500);
-            cartype.AddGrade(400);
+            cartype.AddGrade(425);
 
             //act
 
-            var statistics = cartype.GetStatistics();
+            var result = cartype.GetStatistics();
             //assert
-
-            //Assert.AreEqual(600, statistics.Max);
-            Assert.AreEqual(400, statistics.Min);
-            //Assert.AreEqual(500, cartype.GetStatistics().Average);
-            //Assert.AreEqual(3, statistics.Count);
-            //Assert.AreEqual(150, statistics.Sum);
+            
+            Assert.AreEqual(655f, cartype.GetStatistics().Max);
+         
         }
         [Test]
-        public void CheckCarType()
+        public void CheckCarTypeStatisticsMin()
         {
-            var cartype = new CarType("Mercedes","CLK");
+            //arrange
 
-            Assert.That("Mercedes",Is.EqualTo(cartype.Brand));
-            Assert.That("CLK", Is.EqualTo(cartype.Plate));
+            var cartype = new CarTypeInMemory("Mercedes", "Clk");
+            cartype.AddGrade(655);
+            cartype.AddGrade(500);
+            cartype.AddGrade(1);
 
+            //act
+
+            var result = cartype.GetStatistics();
+            //assert
+
+            Assert.AreEqual(1, cartype.GetStatistics().Min);
+        }
+           
+            [Test]
+            public void CheckCarType()
+            {
+                var cartype = new CarType("Mercedes", "CLK");
+
+                Assert.That("Mercedes", Is.EqualTo(cartype.Brand));
+                Assert.That("CLK", Is.EqualTo(cartype.Plate));
+
+            }
+        
+
+          
         }
     }
-}
+
+   

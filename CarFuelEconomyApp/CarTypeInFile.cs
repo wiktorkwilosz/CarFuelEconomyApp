@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace CarFuelEconomyApp
 {
-    public class CarTypeInFile : CarTypeBase
+    public class CarTypeInMemory : CarTypeBase
     {
         public delegate void CarTypeAddedDelegate(object sender, EventArgs args);
         public event CarTypeAddedDelegate AddedValue;
@@ -15,7 +15,7 @@ namespace CarFuelEconomyApp
 
        
 
-        public CarTypeInFile(string brand,string plate)
+        public CarTypeInMemory(string brand,string plate)
             :base(brand, plate) 
             
         {
@@ -40,10 +40,7 @@ namespace CarFuelEconomyApp
                     {
                         AddedValue(this, new EventArgs());
                     }
-                    //else
-                    //{
-                    //    throw new Exception("Błędna wartość. Wartość musi być większa od zera");
-                    //}
+                    
 
 
                 }

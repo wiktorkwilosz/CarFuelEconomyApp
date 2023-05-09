@@ -9,7 +9,7 @@ string Brand = Console.ReadLine();
 string Plate = Console.ReadLine();
 
 
-CarTypeInFile cartype = new (Brand,Plate);
+CarTypeInMemory cartype = new (Brand,Plate);
 
 cartype.CarTypeAdded += CarType;
 void CarType(object sender, EventArgs args)
