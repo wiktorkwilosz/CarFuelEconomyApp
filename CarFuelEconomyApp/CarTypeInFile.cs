@@ -11,28 +11,24 @@ namespace CarFuelEconomyApp
 
         public const string fileName = "CarTypeAppValues.txt";
 
-        
 
-       
 
-        public CarTypeInMemory(string brand,string plate)
-            :base(brand, plate) 
-            
+
+
+        public CarTypeInMemory(string brand, string plate)
+            : base(brand, plate)
         {
             Brand = brand;
             Plate = plate;
-            
-
         }
 
-        
+
 
         public override void AddGrade(float grade)
         {
             using (var writer = File.AppendText(fileName))
             {
                 if (grade > 0)
-
                 {
 
                     writer.WriteLine(grade);
@@ -40,11 +36,7 @@ namespace CarFuelEconomyApp
                     {
                         AddedValue(this, new EventArgs());
                     }
-                    
-
-
                 }
-
             }
         }
         public override void AddGrade(int grade)
@@ -55,16 +47,15 @@ namespace CarFuelEconomyApp
 
         public override void AddGrade(string grade)
         {
+            if (float.TryParse(grade, out float result))
             {
-                if (float.TryParse(grade, out float result))
-                {
-                    this.AddGrade(result);
-                }
-                else
-                {
-                    throw new Exception("Niepoprawna wartość");
-                }
+                this.AddGrade(result);
             }
+            else
+            {
+                throw new Exception("Niepoprawna wartość");
+            }
+
         }
         public override Statistics GetStatistics()
         {
@@ -89,7 +80,8 @@ namespace CarFuelEconomyApp
 
                     }
                 }
-            } return grades;
+            }
+            return grades;
         }
         private Statistics CountStatistics(List<float> grades)
         {
@@ -99,7 +91,6 @@ namespace CarFuelEconomyApp
 
                 foreach (var grade in grades)
                 {
-
                     statistics.AddGrade(grade);
                     statistics.PointsCollected += grade;
                 }
@@ -107,19 +98,15 @@ namespace CarFuelEconomyApp
             }
             return statistics;
         }
-
-       
-
-       
-
-        public override Statistics RememberTheCollectedPoints()
-        {
-            var gradesFromFile = this.ReadGradesFromFile();
-            var result = this.CountStatistics(gradesFromFile);
-            return result;
-        }
     }
 }
+
+       
+
+       
+
+        
+  
 
 
 

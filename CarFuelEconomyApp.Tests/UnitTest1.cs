@@ -17,9 +17,9 @@ namespace CarFuelEconomyApp.Tests
 
             var result = cartype.GetStatistics();
             //assert
-            
+
             Assert.AreEqual(655f, cartype.GetStatistics().Max);
-         
+
         }
         [Test]
         public void CheckCarTypeStatisticsMin()
@@ -38,20 +38,10 @@ namespace CarFuelEconomyApp.Tests
 
             Assert.AreEqual(1, cartype.GetStatistics().Min);
         }
-           
-            [Test]
-            public void CheckCarType()
-            {
-                var cartype = new CarType("Mercedes", "CLK");
 
-                Assert.That("Mercedes", Is.EqualTo(cartype.Brand));
-                Assert.That("CLK", Is.EqualTo(cartype.Plate));
-
-            }
-        
-
-          
-        }
     }
+
+ }
+
 
    

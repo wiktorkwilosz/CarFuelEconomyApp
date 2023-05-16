@@ -10,6 +10,7 @@ namespace CarFuelEconomyApp
 
         public void AddGrade(int grade);
         public void AddGrade(string grade);
+
         
         Statistics GetStatistics();
     }

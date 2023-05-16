@@ -18,8 +18,6 @@ void CarType(object sender, EventArgs args)
 }
 
 
-
-
 Console.WriteLine("Wprowadź przejechany dystans od ostatniego zatankowania samochodu do pełna");
 
 while (true)

@@ -79,15 +79,6 @@ namespace CarFuelEconomyApp
             return statistics;
         }
 
-        public override Statistics RememberTheCollectedPoints()
-        {
-            var statistics = new Statistics();
-
-            foreach (var grade in this.grades)
-            {
-                statistics.PointsCollected += grade + ",";
-            }
-            return statistics;
-        }
+        
     }
 }
